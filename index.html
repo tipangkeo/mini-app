@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="login.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id"
+        content="593716552091-9p2peh938qde832a8edrv7qlgi88odnq.apps.googleusercontent.com">
+    <title>Login Mini App</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="nav__links">
+                <img class="logo" src="" alt="logo">
+                <li><a href="#"><button>Tentang</button></a></li>
+                <li><a href="#"><button>FAQ</button></a></li>
+                <li><a href="#"><button>Events</button></a></li>
+                <li><a href="#"></a><button>Partnership</button></li>
+                <li><a href="#"><button>Academy</button></a></li>
+            </ul>
+        </nav>
+        <ul>
+            <a class="button_masuk" href="#"><button class="btn_masuk">Masuk</button></a>
+            <a class="button_daftar" href="#"><button class="btn_daftar">Daftar</button></a>
+        </ul>
+    </header>
+
+    <div class="panel_login">
+        <h1>Login</h1>
+        <form method="post">
+            <div class="txt_field">
+                <label>Username</label>
+                <input type="text" required>
+            </div>
+            <div class="txt_field">
+                <label>Password</label>
+                <input type="password" required>
+            </div>
+            <div class="pass">Lupa Password?</div>
+            <input type="submit" value="Masuk">
+            <div class="signup_link">
+                atau masuk dengan</div>
+            <div id="google-signin" class="g-signin2" data-onsuccess="onSignIn"></div>
+            <!-- <input type="submit" value="Google"> -->
+            <div class="signup_link">
+                Belum Ada Akun? <a href="#">Daftar</a>
+            </div>
+        </form>
+    </div>
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img id="image_url" src="" alt="">
+                <!-- <span id="image_url"></span> -->
+                <br>
+                <div class="meta_data">
+                    <span id="id"></span>
+                    <br>
+                    <span id="nama"></span>
+                    <br>
+                    <span id="email"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            var modal = document.getElementById("myModal");
+            var span = document.getElementsByClassName("close")[0];
+            document.getElementById("image_url").src = profile.getImageUrl();
+            // document.getElementById("image_url").innerHTML = 'Image URL: ' + profile.getImageUrl();
+            document.getElementById("id").innerHTML = 'ID: ' + profile.getId();
+            document.getElementById("nama").innerHTML = 'Nama: ' + profile.getName();
+            document.getElementById("email").innerHTML = 'Email: ' + profile.getEmail();
+            // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            // console.log('Name: ' + profile.getName());
+            // console.log('Image URL: ' + profile.getImageUrl());
+            // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            modal.style.display = "block";
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
